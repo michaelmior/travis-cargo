@@ -144,7 +144,7 @@ def doc_upload(version, manifest, args):
         with open('target/doc/index.html', 'w') as f:
             f.write('<meta http-equiv=refresh content=0;url=%s/index.html>' % lib_name)
 
-        run('git', 'clone', 'https://github.com/davisp/ghp-import')
+        run('git', 'clone', '--depth', '1', 'https://github.com/davisp/ghp-import')
         run(sys.executable, './ghp-import/ghp_import.py', '-n', '-m', msg, 'target/doc')
         run_filter(token, 'git', 'push', '-fq', 'https://%s@github.com/%s.git' % (token, repo), 'gh-pages')
 
